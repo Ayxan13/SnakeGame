@@ -3,9 +3,11 @@
 
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>         // std::chrono::seconds
+#include <string_view>    // std::string_view
+#include <limits>         // std::numeric_limits
 
 #if defined _WIN32
-
+#define NOMINMAX
 #include <conio.h>
 #define a_key_pressed() _kbhit()
 #define get_pressed_key() _getch()
@@ -44,11 +46,10 @@ inline void sleep(long long msec)
 	std::this_thread::sleep_for(std::chrono::milliseconds(msec));
 }
 
-inline void keep_window_open()
+inline void keep_window_open(std::string_view const msg = "Press Enter to continue")
 {
-	std::cout << "Press Enter to close the window" << std::endl;
-	std::cin.get(); 
-	std::cin.get();
+	std::cout << msg << std::endl;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 #endif //SNAKE_CONTROLS_H
