@@ -64,7 +64,6 @@ void GamePlay::play()
 	} while (move_succeded);
 
 	cout << "Game Over" << endl;
-	keep_window_open();
 }
 
 
